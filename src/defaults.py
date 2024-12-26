@@ -1,41 +1,27 @@
 from enum import Enum
-import datetime
 
-# TODO: datetime.datetime.fromtimestamp
+DATE_FORMAT = "%d/%m/%y %H:%M"
 
 
 class Status(Enum):
-    TODO = "todo"
-    IN_PROGRESS = "in-progress"
-    DONE = "done"
+    """
+    Enum class representing the status of a task.
+
+    Attributes:
+        TODO (str): Represents a task that has not been started.
+        IN_PROGRESS (str): Represents a task that is currently in progress.
+        DONE (str): Represents a task that has been completed.
+    """
+    TODO = " "
+    IN_PROGRESS = "~"
+    DONE = "x"
 
 
-DEFAULTS = {
-    "sym": {
-        "done": "[x]",
-        "in-progress": "[~]",
-        "todo": "[ ]"
-    },
-    "commands": {
-        "add": "add",
-        "update": "update",
-        "delete": "delete",
-        "list": "list",
-        "mark": "mark"
-    },
-    "status": {
-        "done": {"complete": "done", "short": "d"},
-        "in-progress": {"complete": "in-progress", "short": "p"},
-        "todo": {"complete": "todo", "short": "t"}
+DB_INIT = {
+    0: {
+        "description": "Description",
+        "status": "Status",
+        "createdAt": "Created",
+        "updatedAt": "Updated",
     },
 }
-
-DB_INIT = [
-    {
-        "id": -1,
-        "description": "initdb",
-        "status": Status.TODO.value,
-        "createdAt": f"{datetime.datetime.now().timestamp()}",
-        "updatedAt": f"{datetime.datetime.now().timestamp()}",
-    },
-]
