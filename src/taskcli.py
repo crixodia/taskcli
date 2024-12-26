@@ -1,3 +1,4 @@
+from defaults import Status
 import argparse
 """
 TaskCli: A simple CLI application to track and manage tasks.
@@ -31,7 +32,8 @@ Author:
 """
 import task
 import utils
-from defaults import Status
+import os
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -40,7 +42,12 @@ if __name__ == "__main__":
         epilog="Made by crixodia (https://github.com/crixodia/taskcli)",
     )
 
-    dbm = utils.DbManager("./db.json")
+    dbm = utils.DbManager(
+        os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            "db.json"
+        )
+    )
     tasker = task.Task(dbm)
 
     subparsers = parser.add_subparsers(
