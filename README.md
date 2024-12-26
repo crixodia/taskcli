@@ -2,6 +2,21 @@
 
 Track and manage your tasks with a simple CLI application. Based on the [roadmap.sh](https://roadmap.sh) project [Task Tracker](https://roadmap.sh/projects/task-tracker).
 
+- [TaskCli](#taskcli)
+  - [Usage](#usage)
+  - [Commands](#commands)
+    - [`list`](#list)
+      - [`list done`](#list-done)
+      - [`list todo`](#list-todo)
+      - [`list in-progress`](#list-in-progress)
+    - [`add`](#add)
+    - [`update`](#update)
+    - [`mark-done`](#mark-done)
+    - [`mark-in-progress`](#mark-in-progress)
+    - [`delete`](#delete)
+    - [Help](#help)
+
+
 ## Usage
 
 ```bash
