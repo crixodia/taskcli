@@ -12,9 +12,9 @@ class Status(Enum):
         IN_PROGRESS (str): Represents a task that is currently in progress.
         DONE (str): Represents a task that has been completed.
     """
-    TODO = " "
-    IN_PROGRESS = "~"
-    DONE = "x"
+    TODO = "todo"
+    IN_PROGRESS = "in-progress"
+    DONE = "done"
 
 
 DB_INIT = {

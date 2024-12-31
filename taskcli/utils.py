@@ -1,3 +1,4 @@
+from .defaults import DB_INIT
 import json
 """
 This module provides utility functions and classes for managing JSON-based databases.
@@ -21,8 +22,6 @@ import sys
 
 sys.path.insert(0, os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../src')))
-
-from defaults import DB_INIT
 
 
 def check_and_create_json(json_path: str, default_content: str = ""):
@@ -59,6 +58,7 @@ class DbManager:
         next_id() -> str:
             Returns the next available ID as a string.
     """
+
     def __init__(self, db_json_path: str):
         """
         Initializes the utility class with the given database JSON path.

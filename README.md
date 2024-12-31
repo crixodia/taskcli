@@ -1,226 +1,112 @@
-# TaskCli
+# `taskcli`
 
-Track and manage your tasks with a simple CLI application. Based on the [roadmap.sh](https://roadmap.sh) project [Task Tracker](https://roadmap.sh/projects/task-tracker).
+A simple CLI task manager.
 
-- [TaskCli](#taskcli)
-  - [Usage](#usage)
-  - [Commands](#commands)
-    - [`list`](#list)
-      - [`list done`](#list-done)
-      - [`list todo`](#list-todo)
-      - [`list in-progress`](#list-in-progress)
-    - [`add`](#add)
-    - [`update`](#update)
-    - [`mark-done`](#mark-done)
-    - [`mark-in-progress`](#mark-in-progress)
-    - [`delete`](#delete)
-    - [Help](#help)
+**Usage**:
 
-
-## Usage
-
-```bash
-taskcli [command] [options]
+```console
+$ taskcli [OPTIONS] COMMAND [ARGS]...
 ```
 
-## Commands
+**Options**:
 
-### `list`
+* `--install-completion`: Install completion for the current shell.
+* `--show-completion`: Show completion for the current shell, to copy it or customize the installation.
+* `--help`: Show this message and exit.
 
-List all tasks.
+**Commands**:
 
-```
-┌────┬─────────────┬──────────┬──────────────────┬──────────────────┐
-│ ID │ Description │  Status  │     Created      │     Updated      │ 
-├────┼─────────────┼──────────┼──────────────────┼──────────────────┤
-│  1 │ Hola        │          │  26/12/24 15:00  │  26/12/24 15:00  │ 
-├────┼─────────────┼──────────┼──────────────────┼──────────────────┤
-│  2 │ mundo       │    ~     │  26/12/24 15:00  │  26/12/24 15:15  │ 
-├────┼─────────────┼──────────┼──────────────────┼──────────────────┤
-│  3 │ Cruel       │    x     │  26/12/24 15:06  │  26/12/24 15:06  │ 
-└────┴─────────────┴──────────┴──────────────────┴──────────────────┘
-[ ]: todo, [~]: in progress, [x]: done
-```
+* `add`: Adds a new task to the database with the...
+* `update`: Updates the content of an existing task...
+* `delete`: Deletes a task from the database...
+* `list`: Lists all tasks, optionally filtered by...
+* `mark`: Marks a task with the given id as the...
 
-#### `list done`
+## `taskcli add`
 
-List all done tasks.
+Adds a new task to the database with the given content.
 
-```
-┌────┬─────────────┬──────────┬──────────────────┬──────────────────┐
-│ ID │ Description │  Status  │     Created      │     Updated      │ 
-├────┼─────────────┼──────────┼──────────────────┼──────────────────┤
-│  3 │ Cruel       │    x     │  26/12/24 15:06  │  26/12/24 15:06  │ 
-└────┴─────────────┴──────────┴──────────────────┴──────────────────┘
-[ ]: todo, [~]: in progress, [x]: done
+**Usage**:
+
+```console
+$ taskcli add [OPTIONS] TASK
 ```
 
-#### `list todo`
+**Arguments**:
 
-List all todo tasks.
+* `TASK`: The description of the task to be added.  [required]
 
-```
-┌────┬─────────────┬──────────┬──────────────────┬──────────────────┐
-│ ID │ Description │  Status  │     Created      │     Updated      │ 
-├────┼─────────────┼──────────┼──────────────────┼──────────────────┤
-│  1 │ Hola        │          │  26/12/24 15:00  │  26/12/24 15:00  │
-└────┴─────────────┴──────────┴──────────────────┴──────────────────┘
-[ ]: todo, [~]: in progress, [x]: done
-```
+**Options**:
 
-#### `list in-progress`
+* `--help`: Show this message and exit.
 
-List all in progress tasks.
+## `taskcli update`
 
-```
-┌────┬─────────────┬──────────┬──────────────────┬──────────────────┐
-│ ID │ Description │  Status  │     Created      │     Updated      │ 
-├────┼─────────────┼──────────┼──────────────────┼──────────────────┤
-│  2 │ mundo       │    ~     │  26/12/24 15:00  │  26/12/24 15:15  │ 
-└────┴─────────────┴──────────┴──────────────────┴──────────────────┘
-[ ]: todo, [~]: in progress, [x]: done
+Updates the content of an existing task identified by the given id.
+
+**Usage**:
+
+```console
+$ taskcli update [OPTIONS] TASK_ID TASK
 ```
 
-### `add`
+**Arguments**:
 
-Add a new task.
+* `TASK_ID`: The id of the task to be updated.  [required]
+* `TASK`: The new description of the task.  [required]
 
-```bash
-taskcli add "Hello, world!"
+**Options**:
+
+* `--help`: Show this message and exit.
+
+## `taskcli delete`
+
+Deletes a task from the database identified by the given id.
+
+**Usage**:
+
+```console
+$ taskcli delete [OPTIONS] TASK_ID
 ```
 
-By default, the task is added as a todo task.
+**Arguments**:
 
-```
-┌────┬───────────────┬──────────┬──────────────────┬──────────────────┐
-│ ID │ Description   │  Status  │     Created      │     Updated      │ 
-├────┼───────────────┼──────────┼──────────────────┼──────────────────┤
-│  1 │ Hola          │          │  26/12/24 15:00  │  26/12/24 15:00  │ 
-├────┼───────────────┼──────────┼──────────────────┼──────────────────┤
-│  2 │ mundo         │    ~     │  26/12/24 15:00  │  26/12/24 15:15  │ 
-├────┼───────────────┼──────────┼──────────────────┼──────────────────┤
-│  3 │ Cruel         │    x     │  26/12/24 15:06  │  26/12/24 15:06  │ 
-├────┼───────────────┼──────────┼──────────────────┼──────────────────┤
-│  4 │ Hello, world! │          │  26/12/24 15:57  │  26/12/24 15:57  │ 
-└────┴───────────────┴──────────┴──────────────────┴──────────────────┘
-[ ]: todo, [~]: in progress, [x]: done
-```
+* `TASK_ID`: The id of the task to be deleted.  [required]
 
-### `update`
+**Options**:
 
-Update a task providing the task ID and the new description.
+* `--help`: Show this message and exit.
 
-```bash
-taskcli update 4 "Hello, cruel world!"
+## `taskcli list`
+
+Lists all tasks, optionally filtered by the given status.
+
+**Usage**:
+
+```console
+$ taskcli list [OPTIONS]
 ```
 
-```
-┌────┬─────────────────────┬──────────┬──────────────────┬──────────────────┐
-│ ID │ Description         │  Status  │     Created      │     Updated      │ 
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  1 │ Hola                │          │  26/12/24 15:00  │  26/12/24 15:00  │ 
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  2 │ mundo               │    ~     │  26/12/24 15:00  │  26/12/24 15:15  │ 
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  3 │ Cruel               │    x     │  26/12/24 15:06  │  26/12/24 15:06  │ 
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  4 │ Hello, cruel world! │          │  26/12/24 15:57  │  26/12/24 15:59  │ 
-└────┴─────────────────────┴──────────┴──────────────────┴──────────────────┘
-[ ]: todo, [~]: in progress, [x]: done
-```
+**Options**:
 
-### `mark-done`
+* `--status [todo|in-progress|done]`: Filter tasks by status.
+* `--help`: Show this message and exit.
 
-Mark a task as done providing the task ID.
+## `taskcli mark`
 
-```bash
-taskcli mark-done 4
+Marks a task with the given id as the specified status. By default, the status is set to &#x27;done&#x27;.
+
+**Usage**:
+
+```console
+$ taskcli mark [OPTIONS] TASK_ID [STATUS]:[todo|in-progress|done]
 ```
 
-```
-┌────┬─────────────────────┬──────────┬──────────────────┬──────────────────┐
-│ ID │ Description         │  Status  │     Created      │     Updated      │ 
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  1 │ Hola                │          │  26/12/24 15:00  │  26/12/24 15:00  │
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  2 │ mundo               │    ~     │  26/12/24 15:00  │  26/12/24 15:15  │
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  3 │ Cruel               │    x     │  26/12/24 15:06  │  26/12/24 15:06  │
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  4 │ Hello, cruel world! │    x     │  26/12/24 15:57  │  26/12/24 15:59  │
-└────┴─────────────────────┴──────────┴──────────────────┴──────────────────┘
-[ ]: todo, [~]: in progress, [x]: done
-```
+**Arguments**:
 
-### `mark-in-progress`
+* `TASK_ID`: [required]
+* `[STATUS]:[todo|in-progress|done]`: The status to mark the task with.  [default: done]
 
-Mark a task as in progress providing the task ID.
+**Options**:
 
-```bash
-taskcli mark-in-progress 4
-```
-
-```
-┌────┬─────────────────────┬──────────┬──────────────────┬──────────────────┐
-│ ID │ Description         │  Status  │     Created      │     Updated      │
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  1 │ Hola                │          │  26/12/24 15:00  │  26/12/24 15:00  │
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  2 │ mundo               │    ~     │  26/12/24 15:00  │  26/12/24 15:15  │
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  3 │ Cruel               │    x     │  26/12/24 15:06  │  26/12/24 15:06  │
-├────┼─────────────────────┼──────────┼──────────────────┼──────────────────┤
-│  4 │ Hello, cruel world! │    ~     │  26/12/24 15:57  │  26/12/24 15:59  │
-└────┴─────────────────────┴──────────┴──────────────────┴──────────────────┘
-[ ]: todo, [~]: in progress, [x]: done
-```
-
-### `delete`
-
-Delete a task providing the task ID.
-
-```bash
-taskcli delete 4
-```
-
-```
-┌────┬─────────────┬──────────┬──────────────────┬──────────────────┐
-│ ID │ Description │  Status  │     Created      │     Updated      │
-├────┼─────────────┼──────────┼──────────────────┼──────────────────┤
-│  1 │ Hola        │          │  26/12/24 15:00  │  26/12/24 15:00  │
-├────┼─────────────┼──────────┼──────────────────┼──────────────────┤
-│  2 │ mundo       │    ~     │  26/12/24 15:00  │  26/12/24 15:15  │
-├────┼─────────────┼──────────┼──────────────────┼──────────────────┤
-│  3 │ Cruel       │    x     │  26/12/24 15:06  │  26/12/24 15:06  │
-└────┴─────────────┴──────────┴──────────────────┴──────────────────┘
-[ ]: todo, [~]: in progress, [x]: done
-```
-
-### Help
-
-Show the help message.
-
-```bash
-taskcli -h
-```
-
-```
-usage: TaskCli [-h] {add,update,delete,list,mark-done,mark-in-progress} ...
-
-Track and manage your tasks with a simple CLI application
-
-positional arguments:
-  {add,update,delete,list,mark-done,mark-in-progress}
-                        Available commands
-    add                 Adds a new task
-    update              Update a task given its id and the new description
-    delete              Delete a task given its id
-    list                List all tasks
-    mark-done           Mark a task as done
-    mark-in-progress    Mark a task as in progress
-
-options:
-  -h, --help            show this help message and exit
-
-Made by crixodia (https://github.com/crixodia/taskcli)
-```
+* `--help`: Show this message and exit.

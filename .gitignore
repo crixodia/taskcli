@@ -1,6 +1,7 @@
 config.json
-db.json
+taskcli_db.json
 __pycache__/
 .vscode
 test.json
 .venv
+poetry.lock

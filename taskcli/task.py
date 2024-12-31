@@ -1,5 +1,5 @@
-from defaults import Status, DATE_FORMAT
-from utils import DbManager
+from .defaults import Status, DATE_FORMAT
+from .utils import DbManager
 from datetime import datetime
 from copy import deepcopy
 
@@ -144,42 +144,4 @@ class Task:
                 if not db[k]["status"] in [filter.value, "Status"]:
                     del db[k]
 
-        lid, ldes, lsta, ldat = self.__get_lens__()
-        lens = {
-            "description": ldes,
-            "status": lsta,
-            "createdAt": ldat,
-            "updatedAt": ldat
-        }
-        str_output = ""
-        row = 0
-        for k, v in db.items():
-            if row == 0:
-                a, b, c = "┌", "┬", "┐"
-            elif row < len(db):
-                a, b, c = "├", "┼", "┤"
-
-            str_output += f"{a}{"─"*(lid+2)}{b}{"─"*(ldes+2)}{b}{"─" *
-                                                                 (lsta+2)}{b}{"─"*(ldat+2)}{b}{"─"*(ldat+2)}{c}\n"
-            str_output += f"│ {("ID" if k == "0" else (" " *
-                               (lid-len(k))) + k).center(lid)} │ "
-
-            j = 0
-            for kk, vv in v.items():
-                str_output += f"{vv.center(lens[kk])
-                                 if j != 0 else vv.ljust(lens[kk])} │ "
-                j += 1
-
-            str_output += "\n"
-            row += 1
-
-        a, b, c = "└", "┴", "┘"
-        str_output += f"{a}{"─"*(lid+2)}{b}{"─"*(ldes+2)}{b}{"─" *
-                                                             (lsta+2)}{b}{"─"*(ldat+2)}{b}{"─"*(ldat+2)}{c}"
-
-        print()
-        print(str_output)
-        print(f"[{Status.TODO.value}]: todo, [{
-              Status.IN_PROGRESS.value}]: in progress, [{Status.DONE.value}]: done")
-
-        return str_output
+        return db
